@@ -16,13 +16,29 @@ import java.util.Scanner;
 public class Kata4_V1_8_3010_30 {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Iterator<String> iterator = new EmailLoader(new FileLoader(new File("C:\\Users\\gatete\\Documents\\NetBeansProjects\\Kata4_V1_8_30-10_30\\email.txt"))).items().iterator();
+        Iterator<String> iterator = input();
+        ArrayList<Email> emails = process(iterator);
+        MailHistogramBuilder mailHistogramBuilder = output(emails);        
+    }
+    
+    public static Iterator<String> input(){
+        return new EmailLoader
+        (new FileLoader
+        (new File
+        ("C:\\Users\\gatete\\Documents\\NetBeansProjects\\Kata4_V1_8_30-10_30\\email.txt")))
+                .items().iterator();
+    }
+    
+    public static ArrayList<Email> process(Iterator<String> iterator){
         ArrayList<Email> emails = new ArrayList<>();
         while(iterator.hasNext()){
             emails.add(new Email(iterator.next()));
         }
-        MailHistogramBuilder mailHistogramBuilder = new MailHistogramBuilder(emails);
-        
+        return emails;
+    }
+    
+    public static MailHistogramBuilder output(ArrayList<Email> emails){
+        return new MailHistogramBuilder(emails);
     }
     
 }
